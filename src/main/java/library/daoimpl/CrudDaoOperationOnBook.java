@@ -1,6 +1,7 @@
 package library.daoimpl;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import libraray.entity.Books;
 import library.service.BookOperable;
@@ -10,8 +11,10 @@ public class CrudDaoOperationOnBook implements BookOperable{
 	public boolean insertBook(Books book, Session ses) {
 		if(null!=book)			
 		{
+			Transaction tx=ses.beginTransaction();
 			ses.save(book);
 			ses.flush();
+			tx.commit();
 			ses.close();
 			return true;
 		}

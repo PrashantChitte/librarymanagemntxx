@@ -1,6 +1,11 @@
 package library.serviceimpl;
 
+import java.util.Iterator;
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import libraray.entity.Author;
 import libraray.entity.Books;
@@ -11,23 +16,8 @@ import library.service.BookOperable;
 public class CrudImplOperationOnBook implements BookOperable {
 
 	public boolean insertBook(Books book, Session ses) {
-		Author a1=new Author();
-		a1.setAuth_name("xxx");				
 		
-		Members m1=new Members();
-		m1.setMember_name("prashant");				
-		Books b1=new Books();
-		b1.setBook_name("Angipankh");
-		b1.setAvail_status("Yes");			
-		
-		b1.setAuthor(a1);
-		b1.setMember(m1);		
-		
-		a1.setBook(b1);		
-		
-		m1.setBook(b1);
-		
-		boolean insert=new CrudDaoOperationOnBook().insertBook(b1,ses);
+		boolean insert=new CrudDaoOperationOnBook().insertBook(book,ses);
 		System.out.println("Book Record Saved");
 		
 		return insert;
@@ -36,6 +26,8 @@ public class CrudImplOperationOnBook implements BookOperable {
 	public boolean updateBook(Books book, Session ses, int book_id) {
 		//retrive book here update here and send same id and book to daoclass method to save 
 		//call to Dao class method
+		
+		
 		return false;
 	}
 
@@ -45,8 +37,16 @@ public class CrudImplOperationOnBook implements BookOperable {
 		return false;
 	}
 
-	public boolean displayAllBook(Books book, Session ses) {
-		// call to Dao class method use set to object and display all data here
+	public boolean displayAllBook(Books book, Session ses) {		
+		Transaction transaction = ses.beginTransaction();
+		Query query=ses.createQuery("from Books");
+		List<Books> listOfBooks =query.list();  
+		for (Books books : listOfBooks) {
+			System.out.println(books.getBook_id() + " " + books.getBook_name() + " " + books.getAuthor().getAuth_name() + " "
+					+ books.getMember().getMember_name() + " " + books.getAvail_status());
+		}				
+		transaction.commit();
+
 		return false;
 	}
 

@@ -20,6 +20,7 @@ public class MainLibraryTest {
 		Scanner sc=new Scanner(System.in);
 				
 		CrudImplOperationOnBook crudImplOper=null;
+		Books book=null;
 		char ans;
 		
 	     do
@@ -51,9 +52,9 @@ public class MainLibraryTest {
 				System.out.println("Enter book name:");
 				bookName=sc.next();
 				b1.setBook_name(bookName);
-				/*System.out.println("Enter member name:");
+				System.out.println("Enter member name:");
 				memName=sc.next();
-				m1.setMember_name(memName);*/				
+				m1.setMember_name(memName);				
 				System.out.println("Enter availability of Book(yes/no)");
 				bookAvail=sc.next();
 				b1.setAvail_status(bookAvail);			
@@ -71,7 +72,9 @@ public class MainLibraryTest {
 				 /*Supriya's Task update book
 				 	send NULL Book and book_ID from this case
 				    */
-				 //crudImplOper.updateBook(book, ses, book_id);
+				 System.out.println("Enter book id for upadte book:");
+				 int bookid=sc.nextInt();				 				 				 
+				 crudImplOper.updateBook(book, ses, bookid);
 				break;
 			case 3:
 				crudImplOper=new CrudImplOperationOnBook();
@@ -83,7 +86,7 @@ public class MainLibraryTest {
 				crudImplOper=new CrudImplOperationOnBook();
 				//Suhas's Task display all books
 				// send NULL Book and from this case
-				//crudImplOper.displayAllBook(book, ses);
+				crudImplOper.displayAllBook(book, ses);
 				break;
 			case 5:
 				break;			
