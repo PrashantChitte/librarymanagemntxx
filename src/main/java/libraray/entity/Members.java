@@ -20,6 +20,20 @@ public class Members {
 	@JoinColumn(name="member_id") 
 	private Books book;
 
+	
+	
+	
+	
+	
+
+
+	public Members() {
+		super();
+		
+		this.member_name = null;
+		this.book = null;
+	}
+
 	public int getMember_id() {
 		return member_id;
 	}

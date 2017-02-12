@@ -8,13 +8,13 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import libraray.entity.Author;
 import libraray.entity.Books;
 import libraray.entity.Members;
+import libraray.utility.ConnectionClass;
 
 public class TestClass {
 
 	public static void main(String[] args) {
 		
-		SessionFactory sesfact=new AnnotationConfiguration().configure().buildSessionFactory();
-		Session ses= sesfact.openSession();
+		Session ses=ConnectionClass.getConnectionObject().openSession(); 
 		Transaction tx=ses.beginTransaction();
 		
 		

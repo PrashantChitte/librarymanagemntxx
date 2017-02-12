@@ -9,13 +9,14 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import libraray.entity.Author;
 import libraray.entity.Books;
 import libraray.entity.Members;
+import libraray.utility.ConnectionClass;
 import library.serviceimpl.CrudImplOperationOnBook;
 
 public class MainLibraryTest {
 
 	public static void main(String[] args) {
-		SessionFactory sesfact=new AnnotationConfiguration().configure().buildSessionFactory();
-		Session ses= sesfact.openSession();
+		
+		Session ses=ConnectionClass.getConnectionObject().openSession();
 		Scanner sc=new Scanner(System.in);
 				
 		CrudImplOperationOnBook crudImplOper=null;
@@ -47,12 +48,12 @@ public class MainLibraryTest {
 				System.out.println("Enter author name:");
 				authName=sc.next();
 				a1.setAuth_name(authName);				
-				System.out.println("Enter member name:");
-				memName=sc.next();
-				m1.setMember_name(memName);				
 				System.out.println("Enter book name:");
 				bookName=sc.next();
 				b1.setBook_name(bookName);
+				/*System.out.println("Enter member name:");
+				memName=sc.next();
+				m1.setMember_name(memName);*/				
 				System.out.println("Enter availability of Book(yes/no)");
 				bookAvail=sc.next();
 				b1.setAvail_status(bookAvail);			
@@ -62,7 +63,7 @@ public class MainLibraryTest {
 				
 				a1.setBook(b1);		
 				
-				m1.setBook(b1);
+				m1.setBook(null);
 				crudImplOper.insertBook(b1, ses);
 				break;
 			case 2:
@@ -70,19 +71,19 @@ public class MainLibraryTest {
 				 /*Supriya's Task update book
 				 	send NULL Book and book_ID from this case
 				    */
-				 crudImplOper.updateBook(book, ses, book_id);
+				 //crudImplOper.updateBook(book, ses, book_id);
 				break;
 			case 3:
 				crudImplOper=new CrudImplOperationOnBook();
 				//Pravin's Task remove book
 				//send NULL Book and book id from this case
-				crudImplOper.removeBook(book, ses, book_id);
+				//crudImplOper.removeBook(book, ses, book_id);
 				break;
 			case 4:
 				crudImplOper=new CrudImplOperationOnBook();
 				//Suhas's Task display all books
 				// send NULL Book and from this case
-				crudImplOper.displayAllBook(book, ses);
+				//crudImplOper.displayAllBook(book, ses);
 				break;
 			case 5:
 				break;			

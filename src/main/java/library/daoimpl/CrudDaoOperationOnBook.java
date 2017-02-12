@@ -11,6 +11,8 @@ public class CrudDaoOperationOnBook implements BookOperable{
 		if(null!=book)			
 		{
 			ses.save(book);
+			ses.flush();
+			ses.close();
 			return true;
 		}
 		else

@@ -27,7 +27,7 @@ public class CrudImplOperationOnBook implements BookOperable {
 		
 		m1.setBook(b1);
 		
-		boolean insert=insertBook(b1,ses);
+		boolean insert=new CrudDaoOperationOnBook().insertBook(b1,ses);
 		System.out.println("Book Record Saved");
 		
 		return insert;
